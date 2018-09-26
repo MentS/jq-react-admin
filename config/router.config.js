@@ -26,31 +26,8 @@ export default [
       },
     ],
   },
-  // app
-  // {
-  //   path: '/dashboard',
-  //   component: '../layouts/BasicLayout',
-  //   routes: [
-  //     { path: '/dashboard', redirect: '/dashboard/dash' },
-  //     {
-  //       path: '/dashboard/dash',
-  //       name: 'dash',
-  //       component: '/Dashboard/Dash',
-  //     },
-  //     // {
-  //     //   path: '/dashboard',
-  //     //   name: 'dashboard',
-  //     //   routes: [
-  //     //     {
-  //     //       path: '/dashboard/index',
-  //     //       name: 'index',
-  //     //       component: '/Dashboard/index',
-  //     //     },
-  //     //   ],
-  //     // },
-  //   ],
-  // },
 
+  // app
   {
     path: '/dashboard',
     component: '../layouts/BasicLayout',
