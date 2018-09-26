@@ -80,7 +80,8 @@ export default function request(
     .digest('hex');
 
   const defaultOptions = {
-    credentials: 'include',
+    // mode: 'cors',
+    // credentials: 'include',
   };
   const newOptions = { ...defaultOptions, ...options };
   if (

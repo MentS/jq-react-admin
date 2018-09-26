@@ -1,15 +1,25 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { connect } from 'dva';
 import styles from './Login.less';
 
 const FormItem = Form.Item;
 
+@connect(({ login, loading }) => ({
+  login,
+  submitting: loading.effects['login/login'],
+}))
 class NormalLoginForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        const { dispatch } = this.props;
+        dispatch({
+          type: 'login/login',
+          payload: { ...values },
+        });
       }
     });
   };
