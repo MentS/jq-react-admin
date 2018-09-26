@@ -1,4 +1,12 @@
 export default [
+  {
+    path: '/dashboard',
+    component: '../layouts/BasicLayout',
+    routes: [
+      { path: '/dashboard', redirect: '/dashboard/dash' },
+      { path: '/dashboard/dash', component: './Dashboard/Dash' },
+    ],
+  },
   // user
   {
     path: '/',
@@ -45,7 +53,7 @@ export default [
 
   {
     path: '/dashboard',
-    component: '../layouts/UserLayout',
+    component: '../layouts/BasicLayout',
     routes: [
       { path: '/dashboard', redirect: '/dashboard/dash' },
       { path: '/dashboard/dash', component: './Dashboard/Dash' },
