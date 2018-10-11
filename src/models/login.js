@@ -1,25 +1,48 @@
 import { routerRedux } from 'dva/router';
-import { stringify } from 'qs';
 import { fakeAccountLogin } from '@/services/login';
 
 export default {
   namespace: 'login',
 
-  state: {},
+  state: {
+    securityCodeId: '',
+    message: '',
+  },
 
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
-      console.log(response);
-      yield put(
-        routerRedux.push({
-          pathname: '/dashboard/dash',
-        })
-      );
-      if (response) {
+      if (response.key === -1) {
+        console.log(response);
+        yield put({ type: 'changeMessage', payload: response });
+        yield put({ type: 'changeImg' });
+      } else {
+        yield put(
+          routerRedux.push({
+            pathname: '/dashboard/monitor',
+          })
+        );
       }
     },
   },
 
-  reducers: {},
+  reducers: {
+    changeImg(state, _) {
+      const securityId = Math.random()
+        .toString(36)
+        .substring(2);
+
+      return {
+        ...state,
+        securityCodeId: securityId,
+      };
+    },
+
+    changeMessage(state, { payload }) {
+      return {
+        ...state,
+        message: payload.message,
+      };
+    },
+  },
 };

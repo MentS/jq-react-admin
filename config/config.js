@@ -93,4 +93,12 @@ export default {
   cssnano: {
     mergeRules: false,
   },
+
+  proxy: {
+    '/api': {
+      target: 'http://testmango.38c8.com/',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
+  },
 };
