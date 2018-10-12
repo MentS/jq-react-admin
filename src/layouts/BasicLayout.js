@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Link from 'umi/link';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Popover, Badge, Dropdown, Avatar } from 'antd';
+import { connect } from 'dva';
 import styles from './BasicLayout.less';
-import { getTopMenu } from '@/services/sidebar';
+import { getTopMenu } from '@/services/basic';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
+@connect()
 class BasicLayout extends Component {
   state = {
     collapsed: false,
@@ -14,6 +16,9 @@ class BasicLayout extends Component {
 
   componentDidMount() {
     // this.GetTopMenu();
+    const { dispatch } = this.props;
+    // 轮询 查询 message
+    // dispatch({ type: 'basic/leaveCount' });
   }
 
   //  mango api
@@ -82,6 +87,24 @@ class BasicLayout extends Component {
 
   render() {
     const { children } = this.props;
+    const avatarmenu = (
+      <Menu className={styles.menu} selectedKeys={[]}>
+        <Menu.Item key="userCenter">
+          <Icon type="user" />
+          <span>个人中心</span>
+        </Menu.Item>
+        <Menu.Item key="userinfo">
+          <Icon type="setting" />
+          <span>个人设置</span>
+        </Menu.Item>
+
+        <Menu.Divider />
+        <Menu.Item key="logout">
+          <Icon type="logout" />
+          退出登录
+        </Menu.Item>
+      </Menu>
+    );
 
     return (
       <Layout>
@@ -103,6 +126,37 @@ class BasicLayout extends Component {
               type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
               onClick={this.toggle}
             />
+
+            <div className={styles.right}>
+              <Popover title="消息" trigger="click">
+                <span className={styles.action}>
+                  <Badge
+                    count={6}
+                    className={`${styles.action} ${styles.account}`}
+                    style={{ boxShadow: 'none' }}
+                  >
+                    <Icon
+                      type="bell"
+                      style={{
+                        fontSize: 20,
+                      }}
+                    />
+                  </Badge>
+                </span>
+              </Popover>
+
+              <Dropdown overlay={avatarmenu}>
+                <span className={`${styles.action} ${styles.account}`}>
+                  <Avatar
+                    size="small"
+                    className={styles.avatar}
+                    // src={currentUser.avatar}
+                    alt="avatar"
+                  />
+                  <span className={styles.name}>WhLeo</span>
+                </span>
+              </Dropdown>
+            </div>
           </Header>
 
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
