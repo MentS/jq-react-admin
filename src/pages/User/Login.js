@@ -8,19 +8,6 @@ import styles from './Login.less';
 
 const FormItem = Form.Item;
 
-// function mapState(a, b) {
-//   console.log(a, b);
-// }
-
-// function mapDis(a, b) {
-//   console.log(a, b);
-// }
-
-// @connect(
-//   mapState,
-//   mapDis
-// )
-
 @connect(({ login, loading }) => ({
   login,
   submitting: loading.effects['login/login'],

@@ -97,6 +97,7 @@ export default {
   proxy: {
     '/api': {
       target: 'http://testmango.38c8.com/',
+      // target: 'http://localhost:8080',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     },
